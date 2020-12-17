@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   include ForTasks
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:show, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:show, :edit, :update, :destroy]
   
   def index
       @tasks = current_user.tasks.order(id: :desc).page(params[:page])
@@ -13,18 +13,18 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @task.user_id = current_user.id
   end
 
   def create
     @task = current_user.tasks.build(task_params)
-    
-    if @task.save
-      flash[:success] = 'タスクを作成しました。'
-      redirect_to @task
-    else
-      flash.now[:danger] = 'タスクの作成に失敗しました。'
-      render :new
-    end
+      if @task.save
+        flash[:success] = 'タスクを作成しました。'
+        redirect_to @task
+      else
+        flash.now[:danger] = 'タスクの作成に失敗しました。'
+        render :new
+      end
   end
 
   def edit

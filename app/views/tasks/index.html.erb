@@ -1,5 +1,4 @@
-<% if logged_in? %>
-  <h1><%= current_user.name %>のタスク一覧</h1>
+<h1><%= current_user.name %>のタスク一覧</h1>
   
   <ul>
     <% @tasks.each do |task| %>
@@ -10,12 +9,3 @@
   
   <%= link_to '新規タスクの投稿', new_task_path %>  
   <%= link_to 'ログアウト', logout_path, method: :delete %></li>
-<% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h1>タスク管理で、毎日をもっとスマートに。</h1>
-      <%= link_to 'ログイン', login_path, class: 'nav-link' %>
-      <p>ユーザ登録がまだの方は<%= link_to 'こちら', signup_path, class: 'btn btn-lg btn-primary' %></p>
-    </div>
-  </div>
-<% end %>

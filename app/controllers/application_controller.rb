@@ -17,4 +17,13 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+  
+  def is_it_yours
+    unless @task.user == @current_user
+      flash[:danger] = 'そのタスクにはアクセスできません。'
+      redirect_to root_url
+    end
+  end
+      
+  
 end

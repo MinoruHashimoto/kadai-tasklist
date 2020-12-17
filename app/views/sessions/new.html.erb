@@ -15,4 +15,7 @@
   <%= f.text_field :password_confirmation %>
 
   <%= f.submit 'ログイン' %>
+  
+  <p>ユーザ登録がまだの方は<%= link_to 'こちら', signup_path, class: 'btn btn-lg btn-primary' %></p>
+  
 <% end %>

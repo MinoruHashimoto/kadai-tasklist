@@ -3,8 +3,9 @@
   
   <ul>
     <% @tasks.each do |task| %>
-      <li><%= link_to task.id, task %> : <%= task.status %> &gt; <%= task.content %></li>
+      <li><%= link_to task.id, task %> : <%= task.status %> &gt; <%= task.content %> (<%= task.created_at %>) </li>
     <% end %>
+    <%= paginate @tasks %>
   </ul>
   
   <%= link_to '新規タスクの投稿', new_task_path %>  
@@ -12,9 +13,9 @@
 <% else %>
   <div class="center jumbotron">
     <div class="text-center">
-      <h1>Tasklistへようこそ！</h1>
+      <h1>タスク管理で、毎日をもっとスマートに。</h1>
       <%= link_to 'ログイン', login_path, class: 'nav-link' %>
-      <%= link_to 'ユーザ登録がまだの方はこちら', signup_path, class: 'btn btn-lg btn-primary' %>
+      <p>ユーザ登録がまだの方は<%= link_to 'こちら', signup_path, class: 'btn btn-lg btn-primary' %></p>
     </div>
   </div>
 <% end %>

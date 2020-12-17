@@ -1,5 +1,4 @@
 class TasksController < ApplicationController
-  include ForTasks
   before_action :require_user_logged_in
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
   
@@ -13,7 +12,6 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-    @task.user_id = current_user.id
   end
 
   def create
@@ -28,11 +26,9 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
 
     if @task.update(task_params)
       flash[:success] = 'Task は正常に更新されました'
@@ -44,7 +40,6 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
     @task.destroy
 
     flash[:success] = 'Task は正常に削除されました'
